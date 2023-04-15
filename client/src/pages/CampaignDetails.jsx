@@ -10,11 +10,12 @@ import { thirdweb } from '../assets';
 const CampaignDetails = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { donate, getDonations, contract, address } = useStateContext();
+  const { donate, getWithdrawFlag ,getProofOfWork,getDonations, contract, address } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState('');
   const [donators, setDonators] = useState([]);
+  const [proof,setProof]=useState([]);
 
   const remainingDays = daysLeft(state.deadline);
 
@@ -24,8 +25,14 @@ const CampaignDetails = () => {
     setDonators(data);
   }
 
+  const fetchProofOfWork = async () => {
+    const data = await getProofOfWork(state.pId);
+    
+    setProof(data);
+  }
+
   useEffect(() => {
-    if(contract) fetchDonators();
+    if(contract) {fetchDonators();fetchProofOfWork();}
   }, [contract, address])
 
   const handleDonate = async () => {
@@ -35,6 +42,13 @@ const CampaignDetails = () => {
 
     navigate('/')
     setIsLoading(false);
+  }
+
+  const handleNavi = async()=>{
+    const data=await getWithdrawFlag(state.pId);
+    console.log(data)
+    const newdata={id:state.pId,choice:data}
+    navigate('/withdraw',{state:newdata})
   }
 
   return (
@@ -50,10 +64,16 @@ const CampaignDetails = () => {
           </div>
         </div>
 
-        <div className="flex md:w-[150px] w-full flex-wrap justify-between gap-[30px]">
+        <div className="flex md:w-[150px] w-full flex-wrap justify-between gap-[25px]">
           <CountBox title="Days Left" value={remainingDays} />
           <CountBox title={`Raised of ${state.target}`} value={state.amountCollected} />
           <CountBox title="Total Backers" value={donators.length} />
+          <CustomButton
+          btnType="button"
+          title="Withdraw"
+          styles="w-full bg-[#1dc071]"
+          handleClick={handleNavi}
+          />
         </div>
       </div>
 
@@ -87,11 +107,25 @@ const CampaignDetails = () => {
               <div className="mt-[20px] flex flex-col gap-4">
                 {donators.length > 0 ? donators.map((item, index) => (
                   <div key={`${item.donator}-${index}`} className="flex justify-between items-center gap-4">
-                    <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] break-ll">{index + 1}. {item.donator}</p>
+                    <p className="font-epilogue font-normal text-[16px] text-[#8c6dfd] leading-[26px] break-ll">{index + 1}. {item.donator}</p>
                     <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-ll">{item.donation}</p>
                   </div>
                 )) : (
                   <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">No donators yet. Be the first one!</p>
+                )}
+              </div>
+          </div>
+          <div>
+            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Proof Of Work</h4>
+              <div className="mt-[20px] flex flex-col gap-4">
+                {proof.length > 0 ? proof.map((item, index) => (
+                  <div key={`${item}-${index}`} className="flex justify-between items-center gap-4">
+                    <a className="font-epilogue font-normal text-[16px]  leading-[26px] break-ll text-[#1dc071] underline" target="_blank" href={`http://${item}.ipfs.w3s.link`} >{index + 1}. {item}</a>
+                    {/* <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] break-ll">{index + 1}. {item}</p> */}
+                    <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-ll">{}</p>
+                  </div>
+                )) : (
+                  <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">No Withdrawals done yet!</p>
                 )}
               </div>
           </div>

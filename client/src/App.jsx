@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route,Routes } from 'react-router-dom';
 import { Sidebar,Navbar } from './components';
-import { CampaignDetails,Profile,Home,CreateCampaign } from './pages';
+import { CampaignDetails,Profile,Home,CreateCampaign,Withdraw } from './pages';
 const App = () => {
   return (
     <div className='relative sm:-8 p-4 bg-[#13131a] min-h-screen flex flex-row'>
@@ -15,6 +15,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-campaign" element={<CreateCampaign />} />
           <Route path="/campaign-details/:id" element={<CampaignDetails />} />
+          <Route path="/withdraw" element={<Withdraw />} />
         </Routes>
       </div>
     </div>
