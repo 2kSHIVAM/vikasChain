@@ -3,6 +3,10 @@ import { CustomButton } from '../components'
 import { useStateContext } from '../context';
 import { thirdweb } from '../assets';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Lottie from 'lottie-react'
+
+import eth_image from './Etherium.json'
+import drag_image from './drag_drop.json'
 
 // import Dropzone from 'react-dropzone'
 import { Web3Storage, getFilesFromPath } from 'web3.storage'
@@ -41,16 +45,20 @@ const Withdraw = () => {
       <div className="bg-[#1c1c24] flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4">
         <div className="flex flex-col justify-center items-center p-[16px] sm:min-w-[380px] bg-[#3a3a43] rounded-[10px]">
         <div class="flex flex-col items-center justify-center w-full">
+
   
               <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                   <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                  <div className='w-[300px] mt-[80px] mb-[2px]'>
+                    <Lottie animationData={drag_image}/>
+                  </div>
                       <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
                       <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                       <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                   </div>
                   <input id="dropzone-file" type="file" class="hidden" onChange={handleChange} multiple />
               </label>
-              <div className="flex justify-center items-center mt-[40px]">
+              <div className="flex justify-center items-center mt-[120px]">
             <CustomButton
               btnType="submit"
               title="Upload"
@@ -59,8 +67,10 @@ const Withdraw = () => {
               
             />
           </div>
+          
           </div> 
         </div>
+        
       </div>
     )
   }
@@ -69,6 +79,9 @@ const Withdraw = () => {
       <div className="bg-[#1c1c24] flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4">
         <div className="flex flex-col justify-center items-center p-[16px] sm:min-w-[380px] bg-[#3a3a43] rounded-[10px]">
         <div class="flex flex-col items-center justify-center w-full">
+          <div>
+            <Lottie animationData={eth_image}/>
+          </div>
         <h1 className="font-epilogue font-bold sm:text-[25px] text-[18px] leading-[38px] text-white">Withdraw from Here</h1>
               <div className="flex justify-center items-center mt-[40px]">
               <CustomButton 
