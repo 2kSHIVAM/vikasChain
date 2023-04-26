@@ -13,6 +13,7 @@ const CampaignDetails = () => {
   const { donate, getWithdrawFlag ,getProofOfWork,getDonations, contract, address } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isPermission, setIsPermission] = useState(false);
   const [amount, setAmount] = useState('');
   const [donators, setDonators] = useState([]);
   const [proof,setProof]=useState([]);
@@ -30,9 +31,16 @@ const CampaignDetails = () => {
     
     setProof(data);
   }
-
+  var permission=false
+  const checkOwnerWithdraw=()=>{
+    console.log(state.owner)
+    if(address==state.owner)
+    setIsPermission(true)
+    else
+    setIsPermission(false)
+  }
   useEffect(() => {
-    if(contract) {fetchDonators();fetchProofOfWork();}
+    if(contract) {fetchDonators();fetchProofOfWork(); checkOwnerWithdraw()}
   }, [contract, address])
 
   const handleDonate = async () => {
@@ -68,12 +76,13 @@ const CampaignDetails = () => {
           <CountBox title="Days Left" value={remainingDays} />
           <CountBox title={`Raised of ${state.target}`} value={state.amountCollected} />
           <CountBox title="Total Backers" value={donators.length} />
-          <CustomButton
+          {isPermission&&<CustomButton
           btnType="button"
           title="Withdraw"
           styles="w-full bg-[#1dc071]"
           handleClick={handleNavi}
-          />
+          />}
+          
         </div>
       </div>
 
