@@ -45,7 +45,7 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
   const imagePath = path.join(__dirname, req.file.path);
   const proc = execSync(
     "python3 " +
-      "/home/knight/Desktop/MINOR2/client/src/pages/prepare_ela_image.py " +
+      "prepare_ela_image.py " +
       imagePath
   );
   const results = proc.toString();
@@ -56,6 +56,6 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
   res.send({ newResult, predictions });
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000,() => {
   console.log("Server started on port 3000");
 });
