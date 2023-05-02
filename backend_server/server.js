@@ -65,7 +65,11 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
   console.log("model work done");
   res.send({ newResult, predictions });
 });
-
+app.get("/", (req, res, next) => {
+  res.send({
+    connect: "true",
+  });
+});
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server started on port 3000");
 });
