@@ -84,9 +84,9 @@ const Withdraw = () => {
       console.log(typeof cid)
       const data= await addProof(state.id,cid)
       
-      // console.log(files)
-      // const errorMsg="true..."
-      // handleAlert(errorMsg)
+      console.log(files)
+      const errorMsg="Image Successfully uploaded..."
+      handleAlert(errorMsg)
     }
     else{
       const errorMsg="False image provided and now redirecting to dashboard..."
