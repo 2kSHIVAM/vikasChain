@@ -80,9 +80,9 @@ const Withdraw = () => {
 
     if(prediction)
     {
-      // const cid = await storage.put(files)
-      // console.log(typeof cid)
-      // const data= await addProof(state.id,cid)
+      const cid = await storage.put(files)
+      console.log(typeof cid)
+      const data= await addProof(state.id,cid)
       
       console.log(files)
       const errorMsg="Image Successfully uploaded..."
