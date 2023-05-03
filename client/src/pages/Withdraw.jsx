@@ -60,7 +60,7 @@ const Withdraw = () => {
     }
     var predict;
     try {
-      const response = await axios.post('https://vikas-chain-server.onrender.com/api/upload', formData);
+      const response = await axios.post('http://localhost:3000/api/upload', formData);
       // pathNew=response.data.newResult
       // console.log((pathNew)); // Get the path of the uploaded image from the response
       console.log(response.data.predictions);
@@ -80,9 +80,9 @@ const Withdraw = () => {
 
     if(prediction)
     {
-      const cid = await storage.put(files)
-      console.log(typeof cid)
-      const data= await addProof(state.id,cid)
+      // const cid = await storage.put(files)
+      // console.log(typeof cid)
+      // const data= await addProof(state.id,cid)
       
       console.log(files)
       const errorMsg="Image Successfully uploaded..."
