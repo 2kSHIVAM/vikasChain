@@ -24,7 +24,7 @@ var model;
 async function load() {
   console.log("hello");
   model = await tf.loadLayersModel(
-    "https://nikhil2904.github.io/testibg/model.json"
+    "https://2kSHIVAM.github.io/json-api/vikasChain_ml_model.json"
   );
   console.log("hello");
 }

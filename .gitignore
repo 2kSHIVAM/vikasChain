@@ -1,2 +1,4 @@
 node_modules
 flask-server
+.env
+package-lock.json
